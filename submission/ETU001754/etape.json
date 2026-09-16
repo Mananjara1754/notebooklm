@@ -1,0 +1,20 @@
+{
+    "etudiant": {
+        "nom": "ANDRIAMIHARISOA",
+        "prenom": "Mananjara",
+        "numero_etudiant": "ETU001754"
+    },
+    "fichiers": {
+        "etape_1_interface": "etape_1_interface.py",
+        "etape_2_ingestion": "etape_2_ingestion.py",
+        "etape_3_4_rag": "etape_3_4_rag.py"
+    },
+    "justification_chunking": {
+        "taille_chunk_fixe": true,
+        "explication": "Le chunking utilise un RecursiveCharacterTextSplitter avec chunk_size=1000 et chunk_overlap=200. Une taille de 1000 caracteres correspond environ a 150-200 mots, ce qui permet de conserver une unite semantique complete (un paragraphe) dans chaque fragment sans diluer excessivement le contexte transmis au modele. Le chevauchement de 200 caracteres (soit 20% de la taille du chunk) garantit qu'une idee ou une phrase situee a la frontiere de deux chunks n'est pas coupee et reste retrouvable par la recherche semantique. Les separateurs sont hierarchises (saut de paragraphe, saut de ligne, espace, puis caractere) afin de privilegier des coupures naturelles du texte plutot qu'une coupure brute a taille fixe. Cette approche reste simple et deterministe, contrairement a un chunking semantique plus couteux, tout en offrant un bon compromis entre precision de la recherche vectorielle et taille de contexte pour le LLM local. Ces parametres conviennent aussi bien a des documents PDF qu'a des fichiers texte/Markdown."
+    },
+    "environnement": {
+        "modele_ollama": "mistral (via Ollama, http://localhost:11434)",
+        "modele_embedding": "sentence-transformers/all-MiniLM-L6-v2 (HuggingFace, local)"
+    }
+}
